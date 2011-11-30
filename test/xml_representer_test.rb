@@ -2,13 +2,13 @@ require 'test_helper'
 
 class ItemRepresenter
   include Roar::Representer::XML
-  self.representation_name= :item
+  self.representation_wrap= :item
   property :value
 end
 
 class PositionRepresenter
   include Roar::Representer::XML
-  self.representation_name= :position
+  self.representation_wrap= :position
   property :id
   property :item, :as => ItemRepresenter
 end
@@ -48,7 +48,7 @@ class XMLRepresenterFunctionalTest < MiniTest::Spec
   
   class TestXmlRepresenter
     include Roar::Representer::XML
-    self.representation_name= :order  # FIXME: get from represented?
+    self.representation_wrap= :order  # FIXME: get from represented?
     property :id
   end
   
@@ -56,7 +56,7 @@ class XMLRepresenterFunctionalTest < MiniTest::Spec
   describe "XMLRepresenter" do
     before do
       @m = {"id" => "1"}
-      @o = Order.new(@m)
+      @o = Order.from_attributes(@m)
       @r = TestXmlRepresenter.new
       @i = ItemRepresenter.new
       @i.value = "Beer"
@@ -155,7 +155,7 @@ class XMLRepresenterFunctionalTest < MiniTest::Spec
         @c = Class.new do
           include Roar::Representer::XML
           
-          self.representation_name= :order
+          self.representation_wrap= :order
           property :id
           collection :items, :as => ItemRepresenter, :from => :item
         end
@@ -192,8 +192,8 @@ class XmlHyperlinkRepresenterTest < MiniTest::Spec
       @l = Roar::Representer::XML::Hyperlink.from_xml(%{<link rel="self" href="http://roar.apotomo.de"/>})
     end
     
-    it "responds to #representation_name" do
-      assert_equal :link, @l.class.representation_name
+    it "responds to #representation_wrap" do
+      assert_equal :link, @l.class.representation_wrap
     end
     
     

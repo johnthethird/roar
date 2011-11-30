@@ -60,7 +60,7 @@ class HypermediaTest
           property :note, :as => Note
         end
         
-        assert_equal "{\"page\":{\"note\":{\"links\":[{\"rel\":\"self\",\"href\":\"http://me\"}]}}}", Page.from_attributes(note: Note.new).to_json
+        assert_equal "{\"page\":{\"note\":{\"links\":[{\"rel\":\"self\",\"href\":\"http://me\"}]}}}", Page.from_attributes(:note => Note.new).to_json
       end
     end
     
@@ -158,7 +158,7 @@ class LinkCollectionTest < MiniTest::Spec
   describe "LinkCollection" do
     it "provides #update_link" do
       collection  = Roar::Representer::Feature::Hypermedia::LinkCollection.new
-      link        = Roar::Representer::XML::Hyperlink.from_attributes(rel: "self", href: "http://self")
+      link        = Roar::Representer::XML::Hyperlink.from_attributes(:rel => "self", :href => "http://self")
       
       collection.update_link(link)
       assert_equal 1, collection.size

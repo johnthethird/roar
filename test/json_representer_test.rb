@@ -30,13 +30,13 @@ class JsonRepresenterTest < MiniTest::Spec
       end
       
       it "accepts :except option" do
-        order = Order.from_json({order: {id: 1, pending: 1}}.to_json, :except => [:id])
+        order = Order.from_json({:order => {:id => 1, :pending => 1}}.to_json, :except => [:id])
         assert_equal nil, order.id
         assert_equal 1, order.pending
       end
       
       it "accepts :include option" do
-        order = Order.from_json({order: {id: 1, pending: 1}}.to_json, :include => [:id])
+        order = Order.from_json({:order => {:id => 1, :pending => 1}}.to_json, :include => [:id])
         assert_equal 1, order.id
         assert_equal nil, order.pending
       end

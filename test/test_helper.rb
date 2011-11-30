@@ -1,8 +1,9 @@
 require 'bundler'
 Bundler.setup
 
-require 'test/unit'
+gem 'minitest'
 require 'minitest/spec'
+require 'minitest/autorun'
 
 require 'roar/representer/base'
 require 'roar/representer/feature/hypermedia'
