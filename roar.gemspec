@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
   
-  s.add_runtime_dependency "representable", "~> 0.9.4.divoxx1"
+  s.add_runtime_dependency "representable", "~> 0.9.4"
   s.add_runtime_dependency "hooks",         "~> 0.2"
   
   s.add_development_dependency "rake"
